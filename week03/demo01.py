@@ -16,10 +16,10 @@ print("X:\n%s"%X)
 print("Y:\n%s"%Y)
 
 #1.定义神经网络的输入、参数和输出，定义前向传播过程；
-x = tf.placeholder(tf.float32, shape=(None,2))
-y_ = tf.placeholder(tf.float32, shape=(None,1))
-w1 = tf.Variable(tf.random_normal([2,3],stddev=1,seed=1))
-w2 = tf.Variable(tf.random_normal([3,1],stddev=1,seed=1))
+x = tf.placeholder(tf.float32, shape=(None,2))  #输入
+y_ = tf.placeholder(tf.float32, shape=(None,1))  #真实的结果
+w1 = tf.Variable(tf.random_normal([2,3],stddev=1,seed=1)) #第一层的参数 因为第一层是X为两列的，第二层隐含层设置为3列，所以这里random_normal是[2,3]
+w2 = tf.Variable(tf.random_normal([3,1],stddev=1,seed=1)) #第二层的参数
 
 a = tf.matmul(x,w1)
 y = tf.matmul(a,w2)
