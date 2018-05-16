@@ -12,10 +12,10 @@ LEARNING_RATE_STEP = 1 #喂多少轮BATCH_SIZE后，更新一次学习率
 #运行了几轮BATCH_SIZE的计数器,初始值为0,设置为不被训练
 global_step = tf.Variable(0,trainable=False)
 ######定义指数下降学习率####
-learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE,global_step,LEARNING_RATE_STEP,LEARNING_RATE_DECAY,staircase=True)
+learning_rate = tf.train.exponential_decay(LEARNING_RATE_BASE,global_step,LEARNING_RATE_STEP,LEARNING_RATE_DECAY,staircase=False)
 #定义待优化参数，初始值为10
 w = tf.Variable(tf.constant(10,dtype=tf.float32))
-#定义损失函数loss
+#定义损失函数loss  (w+1)^2  所以最后求出的w接近-1
 loss = tf.square(w+1)
 #定义反向传播方法 (原来这里是直接传入的0.1作为学习率,现在变成传入一个指数下降的学习率)
 train_step = tf.train.GradientDescentOptimizer(learning_rate).minimize(loss,global_step=global_step)
